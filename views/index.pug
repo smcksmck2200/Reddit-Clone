@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Reddit Clone Project
+        script(src="script.js" defer) 
+    body 
+    h1 Murals
+    form(action="/murals", method="POST")
+        input(type="text", name="muralTitle", placeholder="muralTitle")
+        input(type="text", name="image", placeholder="image")
+        button(type="Submit") Submit                                                     
+    h1 Image
+    each image in images
+        h3= `${image.muralTitle} - ${image.image}` 
+    div     
+        h2 Like
+        button(id='likevote-button') add to count in mural Collection 
+    div
+        h2 Dislike
+        button(id='dislikevote-button') subtract from count in mural Collection   
+
