@@ -1,30 +1,40 @@
-const update = document.querySelector('#likevote-button')
-const deleteButton = document.querySelector('#dislikevote-button')
+function addToCount() {
+    let countAsString = document.querySelector('#count').innerHTML
+    let countAsInteger = parseInt(countAsString)
+    let newCount = countAsInteger += 1
+    document.querySelector('#count').innerHTML = newCount
 
-update.addEventListener('click', _ => {
-    const like = {
-        muralTitle: "this is new entry",
-        image: "testimage123"
-    }
+}
+
+function subtractFromCount() {
+    let countAsString = document.querySelector('#count').innerHTML
+    let countAsInteger = parseInt(countAsString)
+    let newCount = countAsInteger -= 1
+    document.querySelector('#count').innerHTML = newCount
+}
+
+const likeButton = document.querySelector('#like-button')
+const dislikeButton = document.querySelector('#dislike-button')
+
+likeButton.addEventListener('click', _ => {
+
     fetch('/murals', {
         method: 'put',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(like)
-    }).then(res => {
-        console.log(res)
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify()
+    }).then(response => {
+        console.log(response)
         window.location.reload(true)
     })
 })
+dislikeButton.addEventListener('click', _ => {
 
-deleteButton.addEventListener('click', _ => {
-    const unlike = {
-        muralTitle: "this is new entry",
-    }
     fetch('/murals', {
-        method: 'delete',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(unlike)
-    }).then(res => {
-        console.log(res)
+        method: 'put',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify()
+    }).then(response => {
+        console.log(response)
+        window.location.reload(true)
     })
 })

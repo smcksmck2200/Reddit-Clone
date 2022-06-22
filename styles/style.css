@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(90, 84, 84);
+    height: 100vh;
+}
+
+header {
+    flex: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(90, 84, 84);
+    color: white;
+}
+
+.button {
+    padding: 8px 16px;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+main {
+    flex: 80%;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    background-color: black;
+    border: solid 2px rgb(163, 53, 53);
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.card-img-top {
+    padding: 10px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.card-title,
+.card-text {
+    display: flex;
+}
+
+label {
+    margin-right: 10px;
+    font-size: large;
+}
+
+input {
+    text-align: center;
+}
+
+footer {
+    flex: 20%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: large;
+    background-color: rgb(163, 53, 53);
+    align-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+@media screen and (mix-width: 800px) {
+    .container {
+        flex-direction: column;
+        justify-content: space-evenly;
+        gap: 20px;
+    }
+    .card-body {
+        text-align: center;
+    }
+}
