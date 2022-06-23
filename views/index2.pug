@@ -16,24 +16,24 @@ html(lang="en")
         h1 Mural List   
       main
         each image in images
-          h5= `${image.muralTitle}`
-          img(src=`${image.image}`, alt="a berlin mural") 
-
-
-
-
-      form(action="/index2", method="POST") 
-        label(for="addMural") Add Mural
-        input(type="text", name="muralTitle", placeholder="muralCreator")
-        input(type="text", name="image", placeholder="url")
-        button(type="submit") Submit
-
-
-
+        
+          <div class="card" style="width: 20rem;">
+            <a href="/" title="Homepage">
+            img.card-img-top(src=`${image.image}`, alt="a berlin mural")
+            </a>
+            <div id=`${image._id}` class="card-body">
+              <p class="card-text">Mural Posted By:</p>
+              h3.card-title= `${image.muralTitle}`
+              <button onclick=addToCount()>Like</button>
+              br     
+              <button onclick=subtractFromCount()>dislike</button>
+              <a href="https://images.pexels.com/photos/464165/pexels-photo-464165.jpeg"></a>
+            </div>
+          </div>
       footer
+        form(action="/index", method="POST") 
+             label(for="addMural") Add Mural? Click Mural Image
 
-
-    script(src="/script.js")  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <a target="_blank" href="https://icons8.com/icon/85638/thumbs-up">Thumbs Up</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>

@@ -16,43 +16,21 @@ html(lang="en")
 
         h1 Mural Images    
       main
-        <div id="count">0</div>
-        <div class="card" style="width: 20rem;">
-        <img src="images/IMG_0999.JPG" class="card-img-top", alt="berlin mural photo by Peter Farrar">
-          <div class="card-body">
-            <h5 class="card-title">Crazy In Berlin</h5>
-            <p class="card-text">Photo By Peter Farrar</p>
-            <button onclick="addToCount()">Like</button>
-            br     
-            <button onclick="subtractFromCount()">dislike</button>
-            <a href="https://images.pexels.com/photos/464165/pexels-photo-464165.jpeg"></a>
+        each image in images
+          <div class="card" style="width: 20rem;">
+            img.card-img-top(src=`${image.image}`, alt="a posted mural")
+            <div id=`${image._id}` class="card-body">
+              <p class="card-text">Mural Posted By:</p>
+              h4.card-title= `${image.muralTitle}`
+              <button onclick=addToCount()>Like</button>
+              br     
+              <button onclick=subtractFromCount()>Dislike</button>
+              <a href="https://images.pexels.com/photos/464165/pexels-photo-464165.jpeg"></a>
+            </div>
           </div>
-        </div>
 
-        <div class="card" style="width: 20rem;">
-        <img src="images/IMG_0989.JPG" class="card-img-top", alt="berlin mural photo by Peter Farrar">
-          <div class="card-body">
-            <h5 class="card-title">See Yourself</h5>
-            <p class="card-text">Photo By Peter Farrar</p>
-            <button onclick="addToCount()">Like</button>
-            br     
-            <button onclick="subtractFromCount()">dislike</button>
-            <a href="https://images.pexels.com/photos/464165/pexels-photo-464165.jpeg"></a>
-          </div>
-        </div>
-        <div class="card" style="width: 20rem;">
-        <img src="images/IMG_1364.JPG" class="card-img-top", alt="berlin mural photo by Peter Farrar">
-          <div class="card-body">
-            <h5 class="card-title">Program Or Be Programmed</h5>
-            <p class="card-text">Photo By Peter Farrar</p>
-            <button onclick="addToCount()">Like</button>
-            br     
-            <button onclick="subtractFromCount()">dislike</button>
-            <a href="https://images.pexels.com/photos/464165/pexels-photo-464165.jpeg"></a>
-          </div>
-        </div>
       footer
-        form(action="/murals", method="POST") 
+        form(action="/index2", method="POST") 
           label(for="addMural") Add Mural
           input(type="text", name="muralTitle", placeholder="muralCreator")
           input(type="text", name="image", placeholder="url")
