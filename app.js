@@ -1,8 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { MongoClient, ServerApiVersion } = require('mongodb')
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const fetch = require('node-fetch')
-const { clusterPassword } = require('./config')
+const config = require('./config')
+const { response } = require('express')
 const app = express()
 
 app.set('view engine', 'pug')
@@ -14,7 +15,7 @@ app.use('/styles', express.static('styles'))
 app.use('/images', express.static('public'))
 app.use(express.static('public'))
 
-const uri = `mongodb+srv://${clusterPassword}@cluster0.fxgx6.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${config.clusterPassword}@cluster0.fxgx6.mongodb.net/?retryWrites=true&w=majority`;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
@@ -29,45 +30,61 @@ client.connect(err => {
 
     app.get("/", (req, res) => {
         muralCollection.find().toArray().then(results => {
-            //console.log(results)
+            console.log(results)
             res.render('index', { images: results })
         })
     })
     app.post("/murals", (req, res) => {
-        console.log(req.body)
-        muralCollection.insertOne(req.body).then(result => {
-            console.log(result)
+        const document = {...req.body, likes: 0, dislikes: 0 }
+        muralCollection.insertOne(document).then(result => {
             res.redirect("/")
         }).catch(error => console.log(error))
     })
-    app.put("/upvote/:id", (req, res) => {
-            console.log(req.params)
-        })
-        // perform actions on the collection object
-    app.put('/murals', (req, res) => {
-        console.log(req.body)
-        muralCollection.findOneAndUpdate({ muralTitle: `Sherwin ${req.body.muralTitle}` }, {
-            $set: {
-                id: req.body.id,
-                muralTitle: req.body.muralTitle,
-                image: req.body.image
+
+    // perform actions on the collection object
+
+    app.put("/like/:postId", (req, res) => {
+        // console.log("!!!!!!!!!!!!!", req.params.postId)
+        let objectId = new ObjectId(req.params.postId)
+        muralCollection.findOneAndUpdate({ _id: objectId }, {
+            $inc: {
+                likes: 1,
             }
         }, {
             upsert: true
         }).then(result => {
-            console.log(result)
+            //console.log(result)
             res.json('Success')
         }).catch(error => console.log(error))
     })
-    app.post("/index2", (req, res) => {
-        console.log(req.body)
-        muralCollection.insertOne(req.body).then(result => {
-            console.log(result)
-            muralCollection.find().toArray().then(results => {
-                console.log(results)
-                res.render('index2', { images: results })
-            })
+    app.put("/dislike/:postId", (req, res) => {
+        let objectId = new ObjectId(req.params.postId)
+        muralCollection.findOneAndUpdate({ _id: objectId }, {
+            $inc: {
+                dislikes: 1
+            }
+        }, {
+            upsert: true
+        }).then(result => {
+            //console.log(result)
+            res.json('Success')
         }).catch(error => console.log(error))
     })
-    app.listen(3000, () => console.log('Server is Serving'))
+    app.put('/murals', (req, res) => {
+        muralCollection.findOneAndUpdate({ muralTitle: ` ${req.body.muralTitle}` }, {
+            $set: {
+                id: req.body._id,
+                muralTitle: req.body.muralTitle,
+                image: req.body.image,
+                likes: req.body.like,
+                dislikes: req.body.dislike
+            }
+        }, {
+            upsert: true
+        }).then(result => {
+            //console.log(result)
+            res.json('Success')
+        }).catch(error => console.log(error))
+    })
+    app.listen((config.port), () => console.log('Server is Serving'))
 });
