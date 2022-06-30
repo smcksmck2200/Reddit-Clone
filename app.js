@@ -1,9 +1,12 @@
+const path = require('path')
+const fs = require('fs')
 const express = require('express')
 const bodyParser = require('body-parser')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb')
 const fetch = require('node-fetch')
-const config = require('./config')
 const { response } = require('express')
+const config = require('./config')
+
 const app = express()
 
 app.set('view engine', 'pug')
