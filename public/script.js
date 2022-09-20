@@ -9,8 +9,8 @@ function postIdLike(button) {
         count++
         button.setAttribute("data-count", count)
         button.innerHTML = `Like ${count}`
-
     })
+
 }
 
 function postIdDislike(button) {
@@ -22,7 +22,6 @@ function postIdDislike(button) {
         let count = button.getAttribute("data-count");
         count++
         button.setAttribute("data-count", count)
-        button.innerHTML = `
-        Dislike ${count}`
+        button.innerHTML = `Dislike ${count}`
     })
 }

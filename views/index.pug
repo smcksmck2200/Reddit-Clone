@@ -19,9 +19,9 @@ html(lang="en")
             <div id= `${image._id}` class="card-body">
               <p class="card-text">Image Posted By:</p>
               h4.card-title= `${image.muralTitle} `
-              button(data-count=image.likes onclick= 'postIdLike(this)' id= "like" value= `${image._id}`) Like #{image.likes}
+              button(data-count= `${image.likes}` onclick= 'postIdLike(this)' id= "like" value= `${image._id}`) Like #{image.likes}
               br
-              button(data-count=image.dislikes onclick= 'postIdDislike(this)' id= "dislike" value= `${image._id}`) Dislike #{image.dislikes}
+              button(data-count= `${image.dislikes}` onclick= 'postIdDislike(this)' id= "dislike" value= `${image._id}`) Dislike #{image.dislikes}
               <a href="https://images.pexels.com/photos/464165/pexels-photo-464165.jpeg"></a>
             </div>
           </div>
